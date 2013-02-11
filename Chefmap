@@ -2,9 +2,9 @@
 
 --- # mongodb component definition
 id: mongodb
-is: database
+is: application
 provides:
-- database: mongodb
+- application: mongodb
 requires:
 - host: linux
 options:

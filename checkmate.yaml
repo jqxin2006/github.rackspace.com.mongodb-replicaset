@@ -1,0 +1,74 @@
+blueprint:
+  id: D1CC995AE7634ED495CD0F5C8ED197E0 
+  name: MySQL on VM
+  description: Deploy a MySQL server
+  services:
+    database:
+      component:
+        interface: mongodb 
+        type: database
+      constraints:
+      - count: 1     
+  options:
+    region:
+      required: true
+      type: select
+      default: ORD
+      label: Region
+      choice:
+      - DFW
+      - ORD
+      - LON
+    os:
+      constrains:
+      - setting: os
+        service: database 
+        resource_type: compute
+      description: The operating system for the all servers.
+      default: Ubuntu 12.04
+      label: Operating System
+      type: select
+      choice:
+      - Ubuntu 12.04
+    server_size:
+      constrains:
+      - setting: memory
+        service: database
+        resource_type: compute
+      description: The size of the database instances in MB of RAM.
+      default: 512
+      label: Server Size
+      type: select
+      choice:
+      - name: 512 Mb
+        value: 512
+      - name: 1 Gb
+        value: 1024
+      - name: 2 Gb
+        value: 2048
+      - name: 4 Gb
+        value: 4096
+      - name: 8 Gb
+        value: 8092
+      - name: 16 Gb
+        value: 16384
+      - name: 30 Gb
+        value: 30720
+environment:
+  description: This environment uses next-gen cloud servers.
+  name: Next-Gen Open Cloud
+  providers:
+    chef-solo:
+      provides:
+      - database: mongodb 
+      - compute: mongodb
+      vendor: opscode
+      constraints:
+      - source: %repo_url%
+    nova: {}
+    common:
+      vendor: rackspace
+inputs:
+  blueprint:
+    region: ORD
+    server_size: 1024

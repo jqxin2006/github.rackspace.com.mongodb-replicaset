@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+#^syntax detection
+
+site 'http://community.opscode.com/api/v1'
+
+cookbook 'apt',
+  :git => 'https://github.rackspace.com/Cookbooks/apt'
+cookbook 'yum'
+cookbook 'openssl'
+cookbook 'build-essential'
+cookbook 'mongodb'

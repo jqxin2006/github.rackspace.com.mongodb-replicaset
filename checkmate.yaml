@@ -5,7 +5,7 @@ blueprint:
     mongodb:
       component:
         type: application
-				name: mongodb
+        name: mongodb
       constraints:
       - count: 1     
   options:

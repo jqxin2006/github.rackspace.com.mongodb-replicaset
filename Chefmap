@@ -16,4 +16,4 @@ options:
 run-list:
   recipes:
   - apt
-  - mongodb::default
+  - mongodb

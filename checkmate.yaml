@@ -1,6 +1,6 @@
 blueprint:
-  name: mongodb on VM
-  description: Deploy a mongodb server
+  name: "mongodb on VM"
+  description: "Deploy a mongodb server"
   services:
     mongodb:
       component:

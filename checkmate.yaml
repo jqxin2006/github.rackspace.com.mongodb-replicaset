@@ -1,12 +1,11 @@
 blueprint:
-  id: D1CC995AE7634ED495CD0F5C8ED197E0 
   name: mongodb on VM
   description: Deploy a mongodb server
   services:
-    database:
+    mongodb:
       component:
-        interface: mongodb 
-        type: database
+        type: application
+				name: mongodb
       constraints:
       - count: 1     
   options:

@@ -1,0 +1,19 @@
+{% set app_id = 'mongodb_server' %}
+
+--- # mongodb component definition
+id: mongodb
+is: database
+provides:
+- database: mongodb
+requires:
+- host: linux
+options:
+  "server_root_password":
+    type: password
+    default: =generate_password()
+    required: true
+# Here are the provider settings and maps for this component
+run-list:
+  recipes:
+  - apt
+  - mongodb::default

@@ -5,7 +5,7 @@ id: mongodb
 is: application
 roles: [data]
 provides:
-- application: mongodb
+- application: http
 requires:
 - host: linux
 options:
@@ -23,7 +23,7 @@ id: mongodb_arbiter
 is: application
 roles: [arbiter]
 provides:
-- application: mongodb
+- application: http
 requires:
 - host: linux
 options:

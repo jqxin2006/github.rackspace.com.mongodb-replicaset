@@ -1,14 +1,57 @@
 blueprint:
-  name: "mongodb on VM"
-  description: "Deploy a mongodb server"
+  name: "MongoDB on VM"
+  description: "Deploy a MongoDB replica set"
   services:
     mongodb:
       component:
         type: application
         name: mongodb
+        role: data
+    mongodb_arbiter:
+      component:
+        type: application
+        name: mongodb
+        role: arbiter
       constraints:
-      - count: 1     
+      - count: 1
+      - memory: 512
   options:
+    domain:
+      regex: ^(([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9])$
+      constrains:
+      - setting: domain
+        service: mongodb
+        resource_type: compute
+      - setting: domain
+        service: mongodb_arbiter
+        resource_type: compute
+      description: 'The domain name to be used for the hostname of your server(s).'
+      label: Domain
+      sample: example.com
+      type: string
+      required: true
+    username:
+      required: true
+      type: string
+      default: admin
+      label: Username
+      description: MongoDB admin username.
+    password:
+      required: true
+      type: string
+      default: =generate_password()
+      label: Password
+      description: MongoDB admin password.
+    server_count:
+      required: true
+      type: int
+      default: 3
+      description: Number of MongoDB data nodes.
+      label: Data Nodes
+      constrains:
+      - setting: count
+        service: mongodb
+        resource_type: compute
     region:
       required: true
       type: select
@@ -21,7 +64,10 @@ blueprint:
     os:
       constrains:
       - setting: os
-        service: database 
+        service: mongodb
+        resource_type: compute
+      - setting: os
+        service: mongodb_arbiter
         resource_type: compute
       description: The operating system for the all servers.
       default: Ubuntu 12.04
@@ -29,10 +75,11 @@ blueprint:
       type: select
       choice:
       - Ubuntu 12.04
+      - Ubuntu 12.10
     server_size:
       constrains:
       - setting: memory
-        service: database
+        service: mongodb
         resource_type: compute
       description: The size of the database instances in MB of RAM.
       default: 512
@@ -59,7 +106,7 @@ environment:
   providers:
     chef-solo:
       provides:
-      - database: mongodb 
+      - application: mongodb 
       - compute: mongodb
       vendor: opscode
       constraints:

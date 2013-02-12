@@ -3,7 +3,7 @@
 --- # mongodb component definition
 id: mongodb
 is: application
-role: [data]
+roles: [data]
 provides:
 - application: mongodb
 requires:
@@ -21,7 +21,7 @@ run-list:
 ---
 id: mongodb_arbiter
 is: application
-role: [arbiter]
+roles: [arbiter]
 provides:
 - application: mongodb
 requires:

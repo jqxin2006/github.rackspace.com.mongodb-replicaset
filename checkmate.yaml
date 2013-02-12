@@ -38,7 +38,7 @@ blueprint:
       description: MongoDB admin username.
     password:
       required: true
-      type: string
+      type: password
       default: =generate_password()
       label: Password
       description: MongoDB admin password.

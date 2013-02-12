@@ -19,10 +19,10 @@ blueprint:
     domains:
       regex: ^(([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9])$
       constrains:
-      - setting: domain
+      - setting: hostname
         service: mongodb
         resource_type: compute
-      - setting: domain
+      - setting: hostname
         service: mongodb_arbiter
         resource_type: compute
       description: 'The domain name to be used for the hostname of your server(s).'
@@ -51,7 +51,7 @@ blueprint:
       constrains:
       - setting: count
         service: mongodb
-        resource_type: compute
+        resource_type: application
     region:
       required: true
       type: select

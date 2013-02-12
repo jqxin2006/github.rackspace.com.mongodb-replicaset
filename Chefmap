@@ -3,6 +3,25 @@
 --- # mongodb component definition
 id: mongodb
 is: application
+role: [data]
+provides:
+- application: mongodb
+requires:
+- host: linux
+options:
+  "server_root_password":
+    type: password
+    default: =generate_password()
+    required: true
+# Here are the provider settings and maps for this component
+run-list:
+  recipes:
+  - apt
+  - mongodb
+---
+id: mongodb_arbiter
+is: application
+role: [arbiter]
 provides:
 - application: mongodb
 requires:

@@ -2,11 +2,20 @@ blueprint:
   name: "MongoDB on VM"
   description: "Deploy a MongoDB replica set"
   services:
+    mongodb_primary:
+      component:
+        type: application
+        name: mongodb
+        role: data
+      constraints:
+      - count: 1
     mongodb:
       component:
         type: application
         name: mongodb
         role: data
+      relations:
+        mongodb_primary: ssh
     mongodb_arbiter:
       component:
         type: application
@@ -23,6 +32,8 @@ blueprint:
         service: mongodb
       - setting: domain
         service: mongodb_arbiter
+      - setting: domain
+        service: mongodb_primary
       description: 'The domain name to be used for the hostname of your server(s).'
       label: Domain
       sample: example.com
@@ -65,6 +76,9 @@ blueprint:
         service: mongodb
         resource_type: compute
       - setting: os
+        service: mongodb_primary
+        resource_type: compute
+      - setting: os
         service: mongodb_arbiter
         resource_type: compute
       description: The operating system for the all servers.
@@ -78,6 +92,9 @@ blueprint:
       constrains:
       - setting: memory
         service: mongodb
+        resource_type: compute
+      - setting: memory
+        service: mongodb_primary
         resource_type: compute
       description: The size of the database instances in MB of RAM.
       default: 512
@@ -104,8 +121,7 @@ environment:
   providers:
     chef-solo:
       provides:
-      - application: mongodb 
-      - compute: mongodb
+      - application: http
       vendor: opscode
       constraints:
       - source: %repo_url%

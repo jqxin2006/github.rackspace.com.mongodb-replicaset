@@ -6,18 +6,20 @@ is: application
 roles: [data]
 provides:
 - application: http
+- application: ssh
 requires:
 - host: linux
-options:
-  "server_root_password":
-    type: password
-    default: =generate_password()
-    required: true
-# Here are the provider settings and maps for this component
 run-list:
   recipes:
   - apt
   - mongodb
+maps:
+- source:  requirements://host:linux/private_ip
+  targets:
+  - outputs://instance:{{resource.index}}/instance/ip
+  - outputs://instance:{{resource.index}}/instance/private_ip
+  - outputs://instance:{{resource.index}}/interfaces/ssh/ip
+  - outputs://instance:{{resource.index}}/interfaces/ssh/private_ip
 ---
 id: mongodb_arbiter
 is: application
@@ -26,13 +28,31 @@ provides:
 - application: http
 requires:
 - host: linux
-options:
-  "server_root_password":
-    type: password
-    default: =generate_password()
-    required: true
 # Here are the provider settings and maps for this component
 run-list:
   recipes:
   - apt
   - mongodb
+---
+id: mongdb_primary
+is: application
+roles: [primary]
+provides:
+- application: http
+- application: ssh
+requires:
+- host: linux
+run-list:
+  recipes:
+  - apt
+  - mongodb
+maps:
+- source: clients://application:ssh/private_ip
+  targets:
+  - attributes://mongodb/replicaset_members
+- source: requirements://host:linux/private_ip
+  targets:
+  - outputs://instance:{{resource.index}}/instance/ip
+  - outputs://instance:{{resource.index}}/instance/private_ip
+  - outputs://instance:{{resource.index}}/interfaces/ssh/ip
+  - outputs://instance:{{resource.index}}/interfaces/ssh/private_ip

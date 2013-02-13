@@ -8,4 +8,6 @@ cookbook 'apt',
 cookbook 'yum'
 cookbook 'openssl'
 cookbook 'build-essential'
-cookbook 'mongodb'
+cookbook 'firewall'
+cookbook 'mongodb',
+  :git => 'https://github.com/slizadel/chef-mongodb.git'

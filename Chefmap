@@ -12,6 +12,7 @@ requires:
 run-list:
   recipes:
   - apt
+  - mongodb::10gen_repo
   - mongodb
 maps:
 - source:  requirements://host:linux/private_ip
@@ -32,6 +33,7 @@ requires:
 run-list:
   recipes:
   - apt
+  - mongodb::10gen_repo
   - mongodb
 ---
 id: mongdb_primary

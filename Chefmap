@@ -1,7 +1,7 @@
 {% set app_id = 'mongodb_server' %}
 
 --- # mongodb component definition
-id: mongodb
+id: data
 is: application
 roles: [data]
 provides:
@@ -22,7 +22,7 @@ maps:
   - outputs://instance:{{resource.index}}/interfaces/ssh/ip
   - outputs://instance:{{resource.index}}/interfaces/ssh/private_ip
 ---
-id: mongodb_arbiter
+id: arbiter 
 is: application
 roles: [arbiter]
 provides:
@@ -36,7 +36,7 @@ run-list:
   - mongodb::10gen_repo
   - mongodb
 ---
-id: mongdb_primary
+id: primary 
 is: application
 roles: [primary]
 provides:

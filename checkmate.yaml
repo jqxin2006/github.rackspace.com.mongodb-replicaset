@@ -2,21 +2,21 @@ blueprint:
   name: "MongoDB on VM"
   description: "Deploy a MongoDB replica set"
   services:
-    mongodb_primary:
+    primary:
       component:
         type: application
         name: mongodb
-        role: data
+        role: primary
       constraints:
       - count: 1
-    mongodb:
+    data:
       component:
         type: application
         name: mongodb
         role: data
       relations:
-        mongodb_primary: ssh
-    mongodb_arbiter:
+        primary: ssh
+    arbiter:
       component:
         type: application
         name: mongodb
@@ -29,11 +29,11 @@ blueprint:
       regex: ^(([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9])$
       constrains:
       - setting: domain
-        service: mongodb
+        service: data
       - setting: domain
-        service: mongodb_arbiter
+        service: arbiter
       - setting: domain
-        service: mongodb_primary
+        service: primary
       description: 'The domain name to be used for the hostname of your server(s).'
       label: Domain
       sample: example.com
@@ -59,7 +59,7 @@ blueprint:
       label: Data Nodes
       constrains:
       - setting: count
-        service: mongodb
+        service: data
         resource_type: application
     region:
       required: true
@@ -73,13 +73,13 @@ blueprint:
     os:
       constrains:
       - setting: os
-        service: mongodb
+        service: data
         resource_type: compute
       - setting: os
-        service: mongodb_primary
+        service: primary
         resource_type: compute
       - setting: os
-        service: mongodb_arbiter
+        service: arbiter
         resource_type: compute
       description: The operating system for the all servers.
       default: Ubuntu 12.04
@@ -91,10 +91,10 @@ blueprint:
     server_size:
       constrains:
       - setting: memory
-        service: mongodb
+        service: data
         resource_type: compute
       - setting: memory
-        service: mongodb_primary
+        service: primary
         resource_type: compute
       description: The size of the database instances in MB of RAM.
       default: 512

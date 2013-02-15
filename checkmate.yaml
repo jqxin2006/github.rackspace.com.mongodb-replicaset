@@ -54,8 +54,8 @@ blueprint:
     server_count:
       required: true
       type: int
-      default: 3
-      description: Number of MongoDB data nodes.
+      default: 2 
+      description: Number of Additional MongoDB data nodes.
       label: Data Nodes
       constrains:
       - setting: count

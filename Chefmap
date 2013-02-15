@@ -6,9 +6,9 @@ is: application
 roles: [data]
 provides:
 - application: http
-- application: ssh
 requires:
 - host: linux
+- application: ssh
 run-list:
   recipes:
   - apt

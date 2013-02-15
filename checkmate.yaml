@@ -132,3 +132,4 @@ inputs:
   blueprint:
     region: ORD
     server_size: 1024
+    domains: example.com

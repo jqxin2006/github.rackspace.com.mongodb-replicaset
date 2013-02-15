@@ -47,6 +47,7 @@ requires:
 run-list:
   recipes:
   - apt
+  - mongodb::10gen_repo
   - mongodb
 maps:
 - source: clients://application:ssh/private_ip

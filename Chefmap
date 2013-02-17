@@ -15,6 +15,9 @@ run-list:
   - mongodb::10gen_repo
   - mongodb::replicaset
 maps:
+- value: false
+  targets:
+  - attributes://mongodb/use_fqdn
 - source:  requirements://host:linux/private_ip
   targets:
   - outputs://instance:{{resource.index}}/instance/ip
@@ -36,6 +39,9 @@ run-list:
   - mongodb::10gen_repo
   - mongodb::replicaset
 maps:
+- value: false
+  targets:
+  - attributes://mongodb/use_fqdn
 - source: clients://application:ssh/private_ip
   targets:
   - attributes://mongodb/replicaset_members

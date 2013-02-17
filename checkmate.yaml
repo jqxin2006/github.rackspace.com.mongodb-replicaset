@@ -107,8 +107,6 @@ environment:
   name: Next-Gen Open Cloud
   providers:
     chef-solo:
-      provides:
-      - application: http
       vendor: opscode
       constraints:
       - source: %repo_url%

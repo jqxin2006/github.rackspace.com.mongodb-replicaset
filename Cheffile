@@ -10,4 +10,4 @@ cookbook 'openssl'
 cookbook 'build-essential'
 cookbook 'firewall'
 cookbook 'mongodb',
-  :git => 'https://github.com/slizadel/chef-mongodb.git'
+  :git => 'https://github.com/ryandub/chef-mongodb.git'

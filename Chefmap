@@ -18,6 +18,9 @@ maps:
 - value: false
   targets:
   - attributes://mongodb/use_fqdn
+- source requirements://host:linux/private_ip
+  targets:
+  - attributes://mongodb/bind_ip
 - source:  requirements://host:linux/private_ip
   targets:
   - outputs://instance:{{resource.index}}/instance/ip
@@ -42,6 +45,9 @@ maps:
 - value: false
   targets:
   - attributes://mongodb/use_fqdn
+- source requirements://host:linux/private_ip
+  targets:
+  - attributes://mongodb/bind_ip
 - source: clients://application:ssh/private_ip
   targets:
   - attributes://mongodb/replicaset_members

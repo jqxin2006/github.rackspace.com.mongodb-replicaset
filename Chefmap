@@ -13,7 +13,7 @@ run-list:
   recipes:
   - apt
   - mongodb::10gen_repo
-  - mongodb
+  - mongodb::replicaset
 maps:
 - source:  requirements://host:linux/private_ip
   targets:
@@ -34,7 +34,7 @@ run-list:
   recipes:
   - apt
   - mongodb::10gen_repo
-  - mongodb
+  - mongodb::replicaset
 maps:
 - source: clients://application:ssh/private_ip
   targets:

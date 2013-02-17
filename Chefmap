@@ -22,20 +22,6 @@ maps:
   - outputs://instance:{{resource.index}}/interfaces/ssh/ip
   - outputs://instance:{{resource.index}}/interfaces/ssh/private_ip
 ---
-id: arbiter 
-is: application
-roles: [arbiter]
-provides:
-- application: http
-requires:
-- host: linux
-# Here are the provider settings and maps for this component
-run-list:
-  recipes:
-  - apt
-  - mongodb::10gen_repo
-  - mongodb
----
 id: primary 
 is: application
 roles: [primary]

@@ -16,22 +16,12 @@ blueprint:
         role: data
       relations:
         primary: ssh
-    arbiter:
-      component:
-        type: application
-        name: mongodb
-        role: arbiter
-      constraints:
-      - count: 1
-      - memory: 512
   options:
     domains:
       regex: ^(([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9])$
       constrains:
       - setting: domain
         service: data
-      - setting: domain
-        service: arbiter
       - setting: domain
         service: primary
       description: 'The domain name to be used for the hostname of your server(s).'
@@ -77,9 +67,6 @@ blueprint:
         resource_type: compute
       - setting: os
         service: primary
-        resource_type: compute
-      - setting: os
-        service: arbiter
         resource_type: compute
       description: The operating system for the all servers.
       default: Ubuntu 12.04

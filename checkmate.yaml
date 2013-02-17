@@ -29,23 +29,11 @@ blueprint:
       sample: example.com
       type: string
       required: true
-    username:
-      required: true
-      type: string
-      default: admin
-      label: Username
-      description: MongoDB admin username.
-    password:
-      required: true
-      type: password
-      default: =generate_password()
-      label: Password
-      description: MongoDB admin password.
     server_count:
       required: true
       type: int
       default: 2 
-      description: Number of Additional MongoDB data nodes.
+      description: Number of Additional MongoDB nodes (one will automatically be set as an arbiter).
       label: Data Nodes
       constrains:
       - setting: count

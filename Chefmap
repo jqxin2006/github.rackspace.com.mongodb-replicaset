@@ -18,7 +18,7 @@ maps:
 - value: false
   targets:
   - attributes://mongodb/use_fqdn
-- source requirements://host:linux/private_ip
+- source: requirements://host:linux/private_ip
   targets:
   - attributes://mongodb/bind_ip
 - source:  requirements://host:linux/private_ip
@@ -45,7 +45,7 @@ maps:
 - value: false
   targets:
   - attributes://mongodb/use_fqdn
-- source requirements://host:linux/private_ip
+- source: requirements://host:linux/private_ip
   targets:
   - attributes://mongodb/bind_ip
 - source: clients://application:ssh/private_ip

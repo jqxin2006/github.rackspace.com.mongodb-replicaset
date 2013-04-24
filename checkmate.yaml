@@ -1,4 +1,5 @@
 blueprint:
+  id: ce2725b5259f44ebb38e54400faedd7f
   name: "MongoDB on VM"
   description: "Deploy a MongoDB replica set"
   services:
@@ -25,71 +26,100 @@ blueprint:
       - setting: domain
         service: primary
       description: 'The domain name to be used for the hostname of your server(s).'
+      display-hints:
+        group: database
+        order: 1
       label: Domain
       sample: example.com
       type: string
       required: true
     server_count:
+      label: Number of Servers
+      type: integer
       required: true
-      type: int
-      default: 2 
-      description: Number of Additional MongoDB nodes (one will automatically be set as an arbiter).
-      label: Data Nodes
+      default: 2
+      description: Number of Additional MongoDB servers (one will automatically be set as an arbiter).
+      display-hints:
+        group: server
+        order: 1
+      constraints:
+      - greater-than-or-equal-to: 2
       constrains:
       - setting: count
         service: data
         resource_type: application
     region:
-      required: true
-      type: select
-      default: ORD
       label: Region
-      choice:
-      - DFW
-      - ORD
-      - LON
+      type: string
+      required: true
+      default: ORD
+      display-hints:
+        group: deployment
+        list-type: region
+        choice:
+        - DFW
+        - ORD
+        - LON
     os:
-      constrains:
-      - setting: os
-        service: data
-        resource_type: compute
-      - setting: os
-        service: primary
-        resource_type: compute
-      description: The operating system for the all servers.
-      default: Ubuntu 12.04
       label: Operating System
-      type: select
+      description: The operating system for all of the servers.
+      type: string
+      default: Ubuntu 12.04
+      display-hints:
+        group: server
+        order: 2
+        list-type: compute.os
       choice:
       - Ubuntu 12.04
       - Ubuntu 12.10
-    server_size:
+      constraints:
+      - in: ["Ubuntu 12.04", "Ubuntu 12.10"]
       constrains:
-      - setting: memory
+      - resource_type: compute
         service: data
-        resource_type: compute
-      - setting: memory
+        setting: os
+      - setting: os
         service: primary
         resource_type: compute
-      description: The size of the database instances in MB of RAM.
-      default: 512
+    server_size:
       label: Server Size
-      type: select
-      choice:
-      - name: 512 Mb
-        value: 512
-      - name: 1 Gb
-        value: 1024
-      - name: 2 Gb
-        value: 2048
-      - name: 4 Gb
-        value: 4096
-      - name: 8 Gb
-        value: 8092
-      - name: 16 Gb
-        value: 16384
-      - name: 30 Gb
-        value: 30720
+      type: integer
+      default: 512      
+      description: The size of the instances in MB of RAM.
+      display-hints:
+        group: server
+        order: 3
+        list-type: compute.memory
+        choice:
+        - name: 512 Mb (20 Gb disk)
+          value: 512
+        - name: 1 Gb (40 Gb disk)
+          value: 1024
+        - name: 2 Gb (80 Gb disk)
+          value: 2048
+        - name: 4 Gb (160 Gb disk)
+          value: 4096
+        - name: 8 Gb (320 Gb disk)
+          value: 8192
+        - name: 16 Gb (620 Gb disk)
+          value: 15872
+        - name: 30 Gb (1.2 Tb disk)
+          value: 30720
+      constrains:
+      - resource_type: compute
+        service: data
+        setting: memory
+      - resource_type: compute
+        service: primary
+        setting: memory
+  meta-data:
+    application-name: MongoDB Replicaset
+    blueprint-type: Component
+    flavor: Multi-Server
+    reach-info:
+      icon-20x20: icons/20x20.png
+      tattoo: icons/tatoo.png
+      groups: ["Servers", "Database"]
 environment:
   description: This environment uses next-gen cloud servers.
   name: Next-Gen Open Cloud

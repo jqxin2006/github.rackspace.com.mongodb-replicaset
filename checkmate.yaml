@@ -117,8 +117,8 @@ blueprint:
     blueprint-type: Component
     flavor: Multi-Server
     reach-info:
-      icon-20x20: icons/20x20.png
-      tattoo: icons/tatoo.png
+      icon-20x20: https://600861890ddb34a8670a-744765205721eed93c384dae790e86aa.ssl.cf2.rackcdn.com/mongodb-icon-20x20.png
+      tattoo: https://600861890ddb34a8670a-744765205721eed93c384dae790e86aa.ssl.cf2.rackcdn.com/mongodb-tattoo.png
       groups: ["Servers", "Database"]
 environment:
   description: This environment uses next-gen cloud servers.

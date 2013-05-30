@@ -1,6 +1,7 @@
 blueprint:
   id: ce2725b5259f44ebb38e54400faedd7f
   name: "MongoDB on VM"
+  version: 1.0.0
   description: "Deploy a MongoDB replica set"
   services:
     primary:
@@ -60,6 +61,7 @@ blueprint:
         - DFW
         - ORD
         - LON
+        - SYD
     os:
       label: Operating System
       description: The operating system for all of the servers.
@@ -101,8 +103,8 @@ blueprint:
           value: 4096
         - name: 8 Gb (320 Gb disk)
           value: 8192
-        - name: 16 Gb (620 Gb disk)
-          value: 15872
+        - name: 15 Gb (620 Gb disk)
+          value: 15000
         - name: 30 Gb (1.2 Tb disk)
           value: 30720
       constrains:
@@ -116,10 +118,17 @@ blueprint:
     application-name: MongoDB Replicaset
     blueprint-type: Component
     flavor: Multi-Server
+    flavor-weight: 1
     reach-info:
       icon-20x20: https://600861890ddb34a8670a-744765205721eed93c384dae790e86aa.ssl.cf2.rackcdn.com/mongodb-icon-20x20.png
       tattoo: https://600861890ddb34a8670a-744765205721eed93c384dae790e86aa.ssl.cf2.rackcdn.com/mongodb-tattoo.png
       groups: ["Servers", "Database"]
+  documentation:
+    abstract: |
+      Multiple servers with MongoDB.  By default, one server will be set as master,
+      another as arbiter, and the rest as slave nodes. 
+    guide: 
+    instructions:
 environment:
   description: This environment uses next-gen cloud servers.
   name: Next-Gen Open Cloud

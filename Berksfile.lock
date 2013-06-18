@@ -1,0 +1,27 @@
+{
+  "sha": "3ca297ebd248b38ec2af9916e1abe22a4e1989ae",
+  "sources": {
+    "apt": {
+      "locked_version": "1.4.9",
+      "git": "https://github.rackspace.com/Cookbooks/apt",
+      "ref": "0a51ba6452bae645abd80d79e6f70d542c69dee1"
+    },
+    "yum": {
+      "locked_version": "2.2.0"
+    },
+    "openssl": {
+      "locked_version": "1.0.2"
+    },
+    "build-essential": {
+      "locked_version": "1.4.0"
+    },
+    "firewall": {
+      "locked_version": "0.10.2"
+    },
+    "mongodb": {
+      "locked_version": "0.12.0",
+      "git": "https://github.com/ryandub/chef-mongodb.git",
+      "ref": "8218e0bcc9474724f57554300589c7e90f5cf4cf"
+    }
+  }
+}

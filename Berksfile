@@ -1,7 +1,4 @@
-#!/usr/bin/env ruby
-#^syntax detection
-
-site 'http://community.opscode.com/api/v1'
+site :opscode
 
 cookbook 'apt',
   :git => 'https://github.rackspace.com/Cookbooks/apt'
@@ -10,4 +7,5 @@ cookbook 'openssl'
 cookbook 'build-essential'
 cookbook 'firewall'
 cookbook 'mongodb',
-  :git => 'https://github.com/ryandub/chef-mongodb.git'
+  :git => 'https://github.com/ryandub/chef-mongodb.git',
+  :ref => '8218e0bcc9474724f57554300589c7e90f5cf4cf'

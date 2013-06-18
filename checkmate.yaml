@@ -129,6 +129,13 @@ blueprint:
       another as arbiter, and the rest as slave nodes. 
     guide: 
     instructions:
+  display-outputs:
+    "Server Private Key":
+      type: private-key
+      source: "resources://deployment-keys/instance/private_key"
+      group: application
+      is-secret: true
+      order: 1
 environment:
   description: This environment uses next-gen cloud servers.
   name: Next-Gen Open Cloud

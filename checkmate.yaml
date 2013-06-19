@@ -138,7 +138,8 @@ blueprint:
       - database: Database Options
   documentation:
     abstract: |
-      Multiple Linux servers with [MongoDB 2.4.4](http://www.mongodb.org/).  
+      Multiple Linux servers with [MongoDB 2.4.4](http://www.mongodb.org/).
+
       By default, one server will be set as master, the second server will be the arbiter, the remaining servers
       will be slave nodes with a maximum of 12 total members. 
     instructions: |

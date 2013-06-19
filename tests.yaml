@@ -1,0 +1,21 @@
+test-cases:
+- name: Check Basic Deployment
+  inputs:
+    blueprint:
+     domains: example.com
+     server_count: 2
+     region: ORD
+     os: Ubuntu 12.04
+     server_size: 1024
+  expected:
+    resources:
+      count: 6  # excludes static resources
+      service:
+        primary:
+          count: 2
+          type1: application
+          type2: compute
+        data:
+          count: 4
+          type1: application
+          type2: compute

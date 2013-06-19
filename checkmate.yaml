@@ -1,7 +1,7 @@
 blueprint:
   id: ce2725b5259f44ebb38e54400faedd7f
   name: "MongoDB on VM"
-  version: 1.0.0
+  version: 1.0.1
   description: "Deploy a MongoDB replica set"
   services:
     primary:
@@ -20,31 +20,39 @@ blueprint:
         primary: ssh
   options:
     domains:
-      regex: ^(([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9])$
       constrains:
       - setting: domain
         service: data
       - setting: domain
         service: primary
       description: 'The domain name to be used for the hostname of your server(s).'
+      help: |
+        **Required**: The domain provided will be used for setting the hostnames of your servers.
       display-hints:
         group: database
         order: 1
+        sample: example.com
       label: Domain
-      sample: example.com
       type: string
       required: true
+      constraints:
+      - regex: ^(([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9])$
     server_count:
-      label: Number of Servers
+      label: Additional Nodes
       type: integer
       required: true
       default: 2
       description: Number of Additional MongoDB servers (one will automatically be set as an arbiter).
+      help: |
+        **Required**: The number of additional nodes to include in addition to the master node.
       display-hints:
         group: server
         order: 1
       constraints:
       - greater-than-or-equal-to: 2
+        message: must include two or more servers
+      - less-than-or-equal-to: 11
+        message: must be fewer than 12 servers 
       constrains:
       - setting: count
         service: data
@@ -71,9 +79,11 @@ blueprint:
         group: server
         order: 2
         list-type: compute.os
-      choice:
-      - Ubuntu 12.04
-      - Ubuntu 12.10
+        choice:
+        - name: Ubuntu 12.04 LTS (Precise Pangolin)
+          value: Ubuntu 12.04
+        - name: Ubuntu 12.10 (Quantal Quetzal)
+          value: Ubuntu 12.10
       constraints:
       - in: ["Ubuntu 12.04", "Ubuntu 12.10"]
       constrains:
@@ -93,19 +103,19 @@ blueprint:
         order: 3
         list-type: compute.memory
         choice:
-        - name: 512 Mb (20 Gb disk)
+        - name: 512 MB (20 GB disk)
           value: 512
-        - name: 1 Gb (40 Gb disk)
+        - name: 1 GB (40 GB disk)
           value: 1024
-        - name: 2 Gb (80 Gb disk)
+        - name: 2 GB (80 GB disk)
           value: 2048
-        - name: 4 Gb (160 Gb disk)
+        - name: 4 GB (160 GB disk)
           value: 4096
-        - name: 8 Gb (320 Gb disk)
+        - name: 8 GB (320 GB disk)
           value: 8192
-        - name: 15 Gb (620 Gb disk)
+        - name: 15 GB (620 GB disk)
           value: 15000
-        - name: 30 Gb (1.2 Tb disk)
+        - name: 30 GB (1.2 TB disk)
           value: 30720
       constrains:
       - resource_type: compute
@@ -115,20 +125,28 @@ blueprint:
         service: primary
         setting: memory
   meta-data:
-    application-name: MongoDB Replicaset
+    schema-version: v0.7
+    application-name: MongoDB
     blueprint-type: Component
-    flavor: Multi-Server
+    flavor: Multiple Linux servers with a MongoDB 2.4.4 Replica Set
     flavor-weight: 1
     reach-info:
       icon-20x20: https://600861890ddb34a8670a-744765205721eed93c384dae790e86aa.ssl.cf2.rackcdn.com/mongodb-icon-20x20.png
       tattoo: https://600861890ddb34a8670a-744765205721eed93c384dae790e86aa.ssl.cf2.rackcdn.com/mongodb-tattoo.png
-      groups: ["Servers", "Database"]
+      option-groups:
+      - server: Server Options
+      - database: Database Options
   documentation:
     abstract: |
-      Multiple servers with MongoDB.  By default, one server will be set as master,
-      another as arbiter, and the rest as slave nodes. 
-    guide: 
-    instructions:
+      Multiple Linux servers with [MongoDB 2.4.4](http://www.mongodb.org/).  
+      By default, one server will be set as master, the second server will be the arbiter, the remaining servers
+      will be slave nodes with a maximum of 12 total members. 
+    instructions: |
+      #### Getting Started
+      
+      If you're new to MongoDB, check out the 
+      [Getting Started with MongoDB](http://docs.mongodb.org/manual/tutorial/getting-started/) 
+      guide.  This document covers the basics of connecting to and using your new replica set.
   display-outputs:
     "Server Private Key":
       type: private-key
@@ -151,4 +169,5 @@ inputs:
   blueprint:
     region: ORD
     server_size: 1024
+    server_count: 2
     domains: example.com

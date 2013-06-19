@@ -75,6 +75,7 @@ blueprint:
       description: The operating system for all of the servers.
       type: string
       default: Ubuntu 12.04
+      required: true
       display-hints:
         group: server
         order: 2
@@ -172,3 +173,4 @@ inputs:
     server_size: 1024
     server_count: 2
     domains: example.com
+    os: Ubuntu 12.04

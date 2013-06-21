@@ -83,10 +83,10 @@ blueprint:
         choice:
         - name: Ubuntu 12.04 LTS (Precise Pangolin)
           value: Ubuntu 12.04
-        - name: Ubuntu 12.10 (Quantal Quetzal)
-          value: Ubuntu 12.10
+        - name: Ubuntu 13.04 (Raring Ringtail)
+          value: Ubuntu 13.04
       constraints:
-      - in: ["Ubuntu 12.04", "Ubuntu 12.10"]
+      - in: ["Ubuntu 12.04", "Ubuntu 13.04"]
       constrains:
       - resource_type: compute
         service: data

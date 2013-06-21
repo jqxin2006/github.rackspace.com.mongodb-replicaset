@@ -1,7 +1,7 @@
 blueprint:
   id: ce2725b5259f44ebb38e54400faedd7f
   name: "MongoDB on VM"
-  version: 1.0.1
+  version: 1.0.2
   description: "Deploy a MongoDB replica set"
   services:
     primary:
@@ -129,7 +129,7 @@ blueprint:
     schema-version: v0.7
     application-name: MongoDB
     blueprint-type: Component
-    flavor: Multiple Linux servers with a MongoDB 2.4.4 Replica Set
+    flavor: Multiple Linux servers with a MongoDB 2.4 Replica Set
     flavor-weight: 1
     reach-info:
       icon-20x20: https://600861890ddb34a8670a-744765205721eed93c384dae790e86aa.ssl.cf2.rackcdn.com/mongodb-icon-20x20.png
@@ -139,7 +139,7 @@ blueprint:
       - database: Database Options
   documentation:
     abstract: |
-      Multiple Linux servers with [MongoDB 2.4.4](http://www.mongodb.org/).
+      Multiple Linux servers with [MongoDB 2.4](http://www.mongodb.org/).
 
       By default, one server will be set as master, the second server will be the arbiter, the remaining servers
       will be slave nodes with a maximum of 12 total members. 

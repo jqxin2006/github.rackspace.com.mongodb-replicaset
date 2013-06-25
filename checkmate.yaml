@@ -44,7 +44,7 @@ blueprint:
       default: 2
       description: Number of Additional MongoDB servers (one will automatically be set as an arbiter).
       help: |
-        **Required**: The number of additional nodes to include in addition to the master node.
+        **Required**: The number of additional nodes to include in addition to the master node.  (Minimum: 2) 
       display-hints:
         group: server
         order: 1

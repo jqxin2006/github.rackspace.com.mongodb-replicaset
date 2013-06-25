@@ -29,7 +29,7 @@ blueprint:
       help: |
         **Required**: The domain provided will be used for setting the hostnames of your servers.
       display-hints:
-        group: database
+        group: server
         order: 1
         sample: example.com
       label: Domain
@@ -47,7 +47,7 @@ blueprint:
         **Required**: The number of additional nodes to include in addition to the master node.  (Minimum: 2) 
       display-hints:
         group: server
-        order: 1
+        order: 2
       constraints:
       - greater-than-or-equal-to: 2
         message: must include two or more servers
@@ -78,7 +78,7 @@ blueprint:
       required: true
       display-hints:
         group: server
-        order: 2
+        order: 3
         list-type: compute.os
         choice:
         - name: Ubuntu 12.04 LTS (Precise Pangolin)
@@ -101,7 +101,7 @@ blueprint:
       description: The size of the instances in MB of RAM.
       display-hints:
         group: server
-        order: 3
+        order: 4
         list-type: compute.memory
         choice:
         - name: 512 MB (20 GB disk)
